@@ -9,4 +9,3 @@ Alternatively, you can open your IDE (Visual Studio Code, Intellij IDEA), create
 <h2>Exercise projects (in folders)</h2>
 
 If you want to execute the exercise project i.e. exercise inside a separate folder like e.g. `our-first-controller`, you can open the folder inside your IDE (Visual Studio Code, Intellij IDEA), build with Maven if needed and then execute it.
-
