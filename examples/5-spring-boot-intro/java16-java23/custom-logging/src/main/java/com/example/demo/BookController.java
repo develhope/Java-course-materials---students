@@ -9,6 +9,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,8 @@ import java.util.Random;
 @Tag(name = "Book", description = "The Book API")
 public class BookController {
 
+    private Logger logger = LoggerFactory.getLogger(BookController.class);
+
     @GetMapping("/{id}")
     @ResponseStatus(value = HttpStatus.OK)
     @Operation(summary = "Returns a book by ID", description = "Returns an existing book by ID")
@@ -33,6 +37,9 @@ public class BookController {
             @Parameter(name = "id", description = "Book id", example = "123", required = true, in = ParameterIn.PATH)
             @PathVariable
             long id) {
+
+        logger.debug("findById called!");
+
         return ResponseEntity.ok(new BookDto(id, "Invented name!"));
     }
 
