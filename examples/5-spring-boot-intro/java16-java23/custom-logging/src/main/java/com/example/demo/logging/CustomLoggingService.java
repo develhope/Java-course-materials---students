@@ -13,7 +13,7 @@ import java.util.*;
 @Service
 public class CustomLoggingService implements LoggingService {
 
-    Logger logger = LoggerFactory.getLogger(LoggingService.class);
+    Logger logger = LoggerFactory.getLogger(CustomLoggingService.class);
 
     @Override
     public void displayReq(HttpServletRequest request, Object body) {
