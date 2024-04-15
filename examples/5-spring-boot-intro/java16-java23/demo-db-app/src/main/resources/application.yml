@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: demo-db-app
+  datasource:
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: ThePassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
