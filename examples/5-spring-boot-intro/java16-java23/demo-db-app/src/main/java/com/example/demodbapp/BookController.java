@@ -17,4 +17,11 @@ public class BookController {
         return bookRepository.findAll();
     }
 
+    @GetMapping("")
+    public BookEntity getBook() {
+        BookEntity newBook = new BookEntity("The Bible", "Mondadori", "ljfdsljhkdf", BookStatus.COME_NUOVO, BookType.LIBRO);
+        bookRepository.save(newBook);
+        return newBook;
+    }
+
 }
