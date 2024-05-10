@@ -1,5 +1,6 @@
 package com.example.dbqueries;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -12,12 +13,14 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     List<BookEntity> findByNameStartingWith(String name);
 
-    List<BookEntity> findByNameContaining(String name);
+    List<BookEntity> findByNameContaining(String name, Pageable pageable);
 
     List<BookEntity> findByNameAndEditor(String name, String editor);
 
     List<BookEntity> findByNameOrEditor(String name, String editor);
 
     List<BookEntity> findByNameStartingWithOrderByNameDesc(String name);
+
+    List<BookEntity> deleteByName(String name);
 
 }
