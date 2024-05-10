@@ -60,4 +60,13 @@ public class BookController {
         }
     }
 
+    @GetMapping("/type")
+    public List<BookEntity> getBooksByType(@RequestParam BookType type) {
+        return bookRepository.findByType(type);
+    }
+
+    @GetMapping("/status")
+    public List<BookEntity> getBooksByStatus(@RequestParam BookStatus status) {
+        return bookRepository.findByStatus(status);
+    }
 }
