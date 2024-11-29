@@ -27,7 +27,7 @@ public class VehicleEntity {
     @Enumerated(EnumType.STRING)
     private VehicleType tipo;
 
-    private VehicleEntity() {}
+    protected VehicleEntity() {}
 
     public VehicleEntity(String azienda, String colore, String modello, double prezzo, VehicleType tipo) {
         this.azienda = azienda;
