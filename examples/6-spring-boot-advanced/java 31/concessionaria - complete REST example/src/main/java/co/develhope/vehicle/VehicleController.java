@@ -5,8 +5,8 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ public class VehicleController {
     Logger logger = LoggerFactory.getLogger(VehicleController.class);
 
     @GetMapping("")
-    public Iterable<VehicleDTO> getAllVehicles() {
+    public Iterable<VehicleDTO> getAllVehicles(@RequestHeader(name = "Cache-Control") String cache) {
         List<VehicleEntity> vehicles = vehicleRepository.findAll();
         List<VehicleDTO> vehicleDTOs = new ArrayList<>();
         for (VehicleEntity vehicle: vehicles) {
@@ -35,10 +35,14 @@ public class VehicleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<VehicleDTO> getVehicle(@PathVariable long id) {
+    public ResponseEntity<VehicleDTO> getVehicle(@RequestHeader HttpHeaders headers, @PathVariable long id) {
         try {
             VehicleEntity vehicle = vehicleRepository.getReferenceById(id);
-            return ResponseEntity.ok(new VehicleDTO(vehicle));
+
+            HttpHeaders responseHeaders = new HttpHeaders();
+            responseHeaders.add("X-Custom-header", "Ciao");
+
+            return ResponseEntity.ok().headers(responseHeaders).body(new VehicleDTO(vehicle));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
